@@ -51,9 +51,3 @@ jobs:
           force_orphan: true
           user_name: "github-actions[bot]"
           user_email: "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - name: Check live GitHub Pages site
-        continue-on-error: true
-        run: |
-          curl -fsSL "https://snatchpremier.github.io/LJT-Homepage/" -o /tmp/ljt-homepage.html
-          grep -q "Junteng Liu" /tmp/ljt-homepage.html
