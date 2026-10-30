@@ -51,3 +51,16 @@ jobs:
           force_orphan: true
           user_name: "github-actions[bot]"
           user_email: "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Verify live GitHub Pages site
+        run: |
+          for i in $(seq 1 36); do
+            if curl -fsSL "https://snatchpremier.github.io/LJT-Homepage/" -o /tmp/ljt-homepage.html && grep -q "Junteng Liu" /tmp/ljt-homepage.html; then
+              echo "GitHub Pages site is live."
+              exit 0
+            fi
+            echo "Waiting for GitHub Pages deployment... ($i/36)"
+            sleep 10
+          done
+          echo "GitHub Pages site did not become available."
+          exit 1
